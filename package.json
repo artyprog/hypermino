@@ -7,17 +7,10 @@
     "hyperapp": "^0.16.0",
     "hyperapp-effects": "^0.2.1"
   },
-  "devDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "jest": "^21.2.1"
-  },
   "scripts": {
     "format": "npx prettier --write '{src,test}/**/*.js'",
     "start": "npx srvs",
-    "test": "jest --coverage"
-  },
-  "babel": {
-    "presets": "env"
+    "test": "npx tead"
   },
   "repository": {
     "type": "git",

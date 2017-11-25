@@ -2,49 +2,81 @@ import { action } from "hyperapp-effects";
 import actions from "../../../src/modules/player/actions";
 const { update, incDrop, updateDrop, resetDrop, move, position } = actions;
 
-test("update produces the right effects", () =>
-  expect(update()(16)).toEqual([action("incDrop", 16), action("updateDrop")]));
-
-test("incDrop updates the dropCounter", () =>
-  expect(incDrop({ dropCounter: 1 })(16)).toEqual({ dropCounter: 17 }));
-
-test("updateDrop yields no effects if the dropCounter is less than dropInterval", () =>
-  expect(updateDrop({ dropCounter: 1, dropInterval: 1000 })).toBe(false));
-
-test("updateDrop yields the right effects if the dropCounter is greater than dropInterval", () =>
-  expect(updateDrop({ dropCounter: 1001, dropInterval: 1000 })).toEqual([
-    action("position.down"),
-    action("resetDrop")
-  ]));
-
-test("resetDrop resets the dropCounter", () =>
-  expect(resetDrop({ dropCounter: 1000 })).toEqual({ dropCounter: 0 }));
-
-test("move for left arrow yields the right effect", () =>
-  expect(move()({ key: "ArrowLeft" })).toEqual([
-    action("position.move", "ArrowLeft")
-  ]));
-
-test("move for down arrow yields the right effects", () =>
-  expect(move()({ key: "ArrowDown" })).toEqual([
-    action("position.move", "ArrowDown"),
-    action("resetDrop")
-  ]));
-
-test("position.move for left arrow yields the right effect", () =>
-  expect(position.move()("ArrowLeft")).toEqual([action("left")]));
-
-test("position.move for right arrow yields the right effect", () =>
-  expect(position.move()("ArrowRight")).toEqual([action("right")]));
-
-test("position.move for down arrow yields the right effect", () =>
-  expect(position.move()("ArrowDown")).toEqual([action("down")]));
-
-test("position.left correctly updates x position", () =>
-  expect(position.left({ x: 1, y: 1 })).toEqual({ x: 0 }));
-
-test("position.right correctly updates x position", () =>
-  expect(position.right({ x: 1, y: 1 })).toEqual({ x: 2 }));
-
-test("position.down correctly updates y position", () =>
-  expect(position.down({ x: 1, y: 1 })).toEqual({ y: 2 }));
+export default {
+  update: {
+    "produces the right effects": [
+      update()(16),
+      [action("incDrop", 16), action("updateDrop")]
+    ]
+  },
+  incDrop: {
+    "updates the dropCounter": [
+      incDrop({ dropCounter: 1 })(16),
+      { dropCounter: 17 }
+    ]
+  },
+  updateDrop: {
+    "yields no effects if the dropCounter is less than dropInterval": [
+      updateDrop({ dropCounter: 1, dropInterval: 1000 }),
+      false
+    ],
+    "yields the right effects if the dropCounter is greater than dropInterval": [
+      updateDrop({ dropCounter: 1001, dropInterval: 1000 }),
+      [action("position.down"), action("resetDrop")]
+    ]
+  },
+  resetDrop: {
+    "resets the dropCounter": [
+      resetDrop({ dropCounter: 1000 }),
+      { dropCounter: 0 }
+    ]
+  },
+  move: {
+    "for left arrow": {
+      "yields the right effect": [
+        move()({ key: "ArrowLeft" }),
+        [action("position.move", "ArrowLeft")]
+      ]
+    },
+    "for down arrow": {
+      "yields the right effects": [
+        move()({ key: "ArrowDown" }),
+        [action("position.move", "ArrowDown"), action("resetDrop")]
+      ]
+    }
+  },
+  position: {
+    ".move": {
+      "for left arrow": {
+        "yields the right effect": [
+          position.move()("ArrowLeft"),
+          [action("left")]
+        ]
+      },
+      "for right arrow": {
+        "yields the right effect": [
+          position.move()("ArrowRight"),
+          [action("right")]
+        ]
+      },
+      "for down arrow": {
+        "yields the right effect": [
+          position.move()("ArrowDown"),
+          [action("down")]
+        ]
+      }
+    },
+    ".left correctly updates x position": [
+      position.left({ x: 1, y: 1 }),
+      { x: 0 }
+    ],
+    ".right correctly updates x position": [
+      position.right({ x: 1, y: 1 }),
+      { x: 2 }
+    ],
+    ".down correctly updates y position": [
+      position.down({ x: 1, y: 1 }),
+      { y: 2 }
+    ]
+  }
+};

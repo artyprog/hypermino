@@ -1,4 +1,3 @@
-import { action, frame, keydown } from "hyperapp-effects";
 import view from "../../../src/modules/main/view";
 import {
   emptyBoardState,
@@ -9,11 +8,11 @@ import {
   movedPositionView
 } from "./viewData";
 
-test("empty arena", () =>
-  expect(view(emptyBoardState)).toEqual(emptyBoardView));
-
-test("single piece in default position", () =>
-  expect(view(defaultPositionState)).toEqual(defaultPositionView));
-
-test("single piece moved down", () =>
-  expect(view(movedPositionState)).toEqual(movedPositionView));
+export default {
+  "empty arena": [view(emptyBoardState), emptyBoardView],
+  "single piece in default position": [
+    view(defaultPositionState),
+    defaultPositionView
+  ],
+  "single piece moved down": [view(movedPositionState), movedPositionView]
+};
