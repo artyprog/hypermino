@@ -4,13 +4,17 @@
   "description": "Simple, modern, minimal Tetris with Hyperapp",
   "private": true,
   "dependencies": {
-    "hyperapp": "^0.16.0",
-    "hyperapp-effects": "^0.2.1"
+    "hyperapp": "^0.18.0",
+    "hyperapp-effects": "^0.4.1"
   },
+  "devDependencies": {
+    "tead": "^0.4.0"
+  },
+  "@std/esm": "cjs",
   "scripts": {
-    "format": "npx prettier --write '{src,test}/**/*.js'",
+    "format": "npx prettier --write {src,test}/**/*.js",
     "start": "npx srvs",
-    "test": "npx tead"
+    "test": "tead --coverage"
   },
   "repository": {
     "type": "git",

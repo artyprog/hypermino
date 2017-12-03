@@ -11,14 +11,14 @@ export default {
   },
   update: {
     "produces the right effects": [
-      update()(9001),
+      update(9001),
       [action("incTime", 9001), action("deltaUpdate"), frame("update")]
     ]
   },
   incTime: {
     "without previous time": {
       "doesn't update delta": [
-        incTime({ time: 0, delta: 0 })(9001),
+        incTime(9001)({ time: 0, delta: 0 }),
         {
           delta: 0,
           time: 9001
@@ -27,7 +27,7 @@ export default {
     },
     "with previous time": {
       "updates time and delta": [
-        incTime({ time: 9001, delta: 0 })(9017),
+        incTime(9017)({ time: 9001, delta: 0 }),
         {
           delta: 16,
           time: 9017
@@ -37,7 +37,7 @@ export default {
   },
   deltaUpdate: {
     "produces the right effects": [
-      deltaUpdate({ delta: 16 }),
+      deltaUpdate()({ delta: 16 }),
       action("player.update", 16)
     ]
   }
