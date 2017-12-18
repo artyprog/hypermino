@@ -14,8 +14,8 @@ const Tetromino = ({ grid = [], x = 0, y = 0 }) =>
               transform: "scale(20)",
               x: x + offsetX,
               y: y + offsetY,
-              width: 1,
-              height: 1,
+              width: 0.95,
+              height: 0.95,
               fill: "red"
             })
         )
@@ -26,10 +26,10 @@ const Tetromino = ({ grid = [], x = 0, y = 0 }) =>
 export default ({ player: { active, position } }) =>
   svg(
     {
-      width: 240,
-      height: 400,
+      viewBox: "0 0 240 400",
       style: {
-        background: "black"
+        background: "black",
+        height: "100vh"
       }
     },
     Tetromino({ grid: active, ...position })
