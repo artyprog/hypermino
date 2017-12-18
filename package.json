@@ -14,7 +14,8 @@
   "scripts": {
     "format": "npx prettier --write {src,test}/**/*.js",
     "start": "npx srvs",
-    "test": "tead --coverage"
+    "test": "tead --coverage",
+    "watch": "tead --watch"
   },
   "repository": {
     "type": "git",
